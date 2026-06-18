@@ -1,3 +1,4 @@
+import { HiOutlineCursorClick } from "react-icons/hi";
 function getPageDimensions(clicks) {
   const maxX = Math.max(...clicks.map((click) => Number(click.x) || 0), 1000);
 
@@ -41,16 +42,22 @@ export default function ClickMap({ selectedPage, clicks, loading }) {
   const visualHeight = getVisualHeight(pageWidth, pageHeight);
 
   return (
-    <div className="mt-6 rounded-xl border border-[#fcfcfc] bg-white p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] md:rounded-card md:p-7">
+    <div className="mt-5 rounded-xl  border border-[#ebe8e8] bg-[#f8fbff]  p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)]  md:p-7">
       <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-        <div className="min-w-0">
-          <h2 className="text-2xl font-bold tracking-[-0.03em] text-text md:text-3xl">
-            Full Page Click Positions
-          </h2>
+        <div className="flex items-start gap-3 min-w-0">
+          <div className="rounded-full bg-[#eef6ff] p-2">
+            <HiOutlineCursorClick className="text-xl text-primary" />
+          </div>
 
-          <p className="mt-2 break-all text-sm font-medium leading-6 text-text-secondary">
-            {selectedPage}
-          </p>
+          <div className="min-w-0">
+            <h2 className="text-2xl font-bold tracking-[-0.03em] text-text md:text-3xl">
+              Full Page Click Positions
+            </h2>
+
+            <p className="mt-2 break-all text-sm font-medium leading-6 text-text-secondary">
+              {selectedPage}
+            </p>
+          </div>
         </div>
 
         <span className="w-fit shrink-0 rounded-full bg-[#eef6ff] px-4 py-2 text-xs font-bold text-primary">
