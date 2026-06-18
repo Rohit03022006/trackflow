@@ -1,5 +1,5 @@
 (function () {
-  const API_URL = "http://localhost:5000/api/events";
+  const API_URL = "https://trackflow-podh.onrender.com/api/events";
   const SESSION_KEY = "trackflow_session_id";
 
   function generateSessionId() {
@@ -27,29 +27,13 @@
   }
 
   function sendEvent(payload) {
-    console.log("Sending TrackFlow event:", payload);
-
     fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
-    })
-      .then(async function (response) {
-        const data = await response.json().catch(function () {
-          return {};
-        });
-
-        if (!response.ok) {
-          console.error("TrackFlow API error:", data);
-        } else {
-          console.log("TrackFlow event saved:", data);
-        }
-      })
-      .catch(function (error) {
-        console.error("TrackFlow request failed:", error);
-      });
+    }).catch(console.error);
   }
 
   function createBaseEvent(eventType) {
@@ -61,15 +45,47 @@
     };
   }
 
+  function getPageSize() {
+    const body = document.body;
+    const html = document.documentElement;
+
+    return {
+      page_width: Math.max(
+        body.scrollWidth,
+        body.offsetWidth,
+        html.clientWidth,
+        html.scrollWidth,
+        html.offsetWidth
+      ),
+      page_height: Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight
+      ),
+    };
+  }
+
   function trackPageView() {
-    sendEvent(createBaseEvent("page_view"));
+    const pageSize = getPageSize();
+
+    sendEvent({
+      ...createBaseEvent("page_view"),
+      page_width: pageSize.page_width,
+      page_height: pageSize.page_height,
+    });
   }
 
   function trackClick(event) {
+    const pageSize = getPageSize();
+
     sendEvent({
       ...createBaseEvent("click"),
-      x: event.clientX,
-      y: event.clientY,
+      x: event.pageX,
+      y: event.pageY,
+      page_width: pageSize.page_width,
+      page_height: pageSize.page_height,
     });
   }
 
@@ -81,41 +97,3 @@
 
   document.addEventListener("click", trackClick);
 })();
-
-function getPageSize() {
-  const body = document.body;
-  const html = document.documentElement;
-
-  return {
-    page_width: Math.max(
-      body.scrollWidth,
-      body.offsetWidth,
-      html.clientWidth,
-      html.scrollWidth,
-      html.offsetWidth
-    ),
-    page_height: Math.max(
-      body.scrollHeight,
-      body.offsetHeight,
-      html.clientHeight,
-      html.scrollHeight,
-      html.offsetHeight
-    ),
-  };
-}
-
-function trackClick(event) {
-  const pageSize = getPageSize();
-
-  sendEvent({
-    ...createBaseEvent("click"),
-
-    // Full page coordinates
-    x: event.pageX,
-    y: event.pageY,
-
-    // Full page size
-    page_width: pageSize.page_width,
-    page_height: pageSize.page_height,
-  });
-}
