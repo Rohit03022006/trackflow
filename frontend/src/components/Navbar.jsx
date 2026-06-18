@@ -19,7 +19,7 @@ export default function Navbar() {
 
           <div>
             <p className="text-base font-bold leading-none text-text">
-              CausalFunnel
+              Trackflow
             </p>
             <p className="mt-1 text-xs font-medium text-text-secondary">
               Analytics Dashboard
@@ -31,9 +31,19 @@ export default function Navbar() {
           <NavLink to="/" className={linkClass}>
             Sessions
           </NavLink>
+
           <NavLink to="/heatmap" className={linkClass}>
             Heatmap
           </NavLink>
+
+          <a
+            href="/demo.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full px-4 py-2 text-sm font-semibold text-text transition hover:bg-[#eef6ff] hover:text-primary"
+          >
+            Track SDK
+          </a>
         </nav>
       </div>
     </header>
