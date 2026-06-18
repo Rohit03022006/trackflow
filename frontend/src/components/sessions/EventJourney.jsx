@@ -1,3 +1,4 @@
+import { FiActivity, FiExternalLink } from "react-icons/fi";
 function formatTime(timestamp) {
   return new Date(timestamp).toLocaleTimeString([], {
     hour: "2-digit",
@@ -8,20 +9,38 @@ function formatTime(timestamp) {
 
 export default function EventJourney({ selectedSession, events, loading }) {
   return (
-    <div className="rounded-xl border border-[#fcfcfc] bg-white p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] md:rounded-card md:p-7">
+    <div className="rounded-xl border border-[#ebe8e8] bg-[#f8fbff] p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] md:p-7">
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-[-0.03em] text-text md:text-3xl">
-            Event Journey
-          </h2>
+          <div className="flex items-center gap-3">
+            <div className="rounded-full bg-[#eef6ff] p-2">
+              <FiActivity className="text-primary" />
+            </div>
+
+            <h2 className="text-2xl font-bold tracking-[-0.03em] text-text md:text-3xl">
+              Event Journey
+            </h2>
+          </div>
 
           {selectedSession ? (
-            <p className="mt-2 break-all text-sm font-medium leading-6 text-text-secondary">
-              Session:{" "}
-              <span className="font-semibold text-primary">
-                {selectedSession}
-              </span>
-            </p>
+            <div className="mt-2 space-y-1">
+              <p className="break-all text-sm font-medium leading-6 text-text-secondary">
+                Session:
+                <span className="font-semibold text-primary ml-1">
+                  {selectedSession}
+                </span>
+              </p>
+
+              <a
+                href="/demo.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+              >
+                Generate Click Data
+                <FiExternalLink size={14} />
+              </a>
+            </div>
           ) : (
             <p className="mt-2 text-sm font-medium leading-6 text-text">
               Select a session to view events.
@@ -72,9 +91,20 @@ export default function EventJourney({ selectedSession, events, loading }) {
                 )}
               </div>
 
-              <p className="mt-4 break-all rounded-2xl bg-[#f8fbff] px-4 py-3 text-xs font-medium leading-5 text-text-secondary">
-                {event.page_url}
-              </p>
+              {event.page_url ? (
+                <a
+                  href={event.page_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 block break-all rounded-xl bg-gray-50 px-4 py-3 text-xs text-blue-600 hover:underline"
+                >
+                  {event.page_url}
+                </a>
+              ) : (
+                <p className="mt-4 text-xs text-gray-500">
+                  No page URL available
+                </p>
+              )}
             </div>
           ))}
         </div>
