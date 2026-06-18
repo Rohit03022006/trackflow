@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { api } from "../lib/api";
 import SessionList from "../components/sessions/SessionList";
 import EventJourney from "../components/sessions/EventJourney";
-
+import { FiUsers } from "react-icons/fi";
 export default function Sessions() {
   const [sessions, setSessions] = useState([]);
   const [selectedSession, setSelectedSession] = useState("");
@@ -50,38 +50,29 @@ export default function Sessions() {
   }
 
   return (
-    <section className="space-y-8 p4">
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-        <div className="max-w-3xl">
-          <span className="mb-4 inline-flex rounded-full bg-[#eef6ff] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary">
-            User Journey
-          </span>
+    <div className="space-y-6 h-full">
+      <div className="flex items-center gap-3">
+  <div className="rounded-full bg-blue-50 p-2">
+    <FiUsers className="text-xl text-primary" />
+  </div>
 
-          <h1 className="text-xl font-bold tracking-[-0.04em] text-text md:text-5xl lg:text-[54px] lg:leading-[1.15]">
-            Sessions View
-          </h1>
+  <div>
+    <h1 className="text-3xl font-bold text-gray-900">
+      Sessions View
+    </h1>
 
-          <p className="mt-4 max-w-2xl text-base font-medium leading-7 text-text-secondary md:text-lg">
-            View tracked sessions and click a session to see the user journey in
-            timestamp order.
-          </p>
-        </div>
-
-        <div className="w-full rounded-[28px] border border-[#fcfcfc] bg-[#f8fbff] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] sm:w-55 md:rounded-[36px]">
-          <p className="text-sm font-bold text-text-secondary">Total Sessions</p>
-          <p className="mt-2 text-4xl font-black tracking-[-0.04em] text-primary">
-            {sessions.length}
-          </p>
-        </div>
-      </div>
+    <p className="mt-2 text-gray-600">
+      View tracked sessions and explore user journeys.
+    </p>
+  </div>
+</div>
 
       {error && (
-        <div className="rounded-3xl border border-red-100 bg-red-50 px-5 py-4 text-sm font-semibold text-red-600">
+        <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">
           {error}
         </div>
       )}
-
-      <div className="grid gap-6 lg:grid-cols-[0.9fr_1.4fr]">
+      <div className="grid gap-6 lg:grid-cols-2">
         <SessionList
           sessions={sessions}
           selectedSession={selectedSession}
@@ -95,6 +86,6 @@ export default function Sessions() {
           loading={loadingEvents}
         />
       </div>
-    </section>
+    </div>
   );
 }
