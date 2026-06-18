@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { api } from "../lib/api";
 import PageSelector from "../components/heatmap/PageSelector";
 import ClickMap from "../components/heatmap/ClickMap";
-import { HiOutlineCursorClick } from "react-icons/hi";
+import { FiMousePointer } from "react-icons/fi";
+
 export default function Heatmap() {
   const [pages, setPages] = useState([]);
   const [selectedPage, setSelectedPage] = useState("");
@@ -59,7 +60,7 @@ export default function Heatmap() {
     <section className="space-y-6">
       <div className="flex items-center gap-3">
         <div className="rounded-full bg-blue-50 p-2">
-          <HiOutlineCursorClick className="text-xl text-primary" />
+          <FiMousePointer className="text-xl text-primary" />
         </div>
 
         <div>
