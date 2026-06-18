@@ -1,4 +1,4 @@
-import { HiOutlineCursorClick } from "react-icons/hi";
+import { FiMousePointer } from "react-icons/fi";
 function getPageDimensions(clicks) {
   const maxX = Math.max(...clicks.map((click) => Number(click.x) || 0), 1000);
 
@@ -46,7 +46,7 @@ export default function ClickMap({ selectedPage, clicks, loading }) {
       <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div className="flex items-start gap-3 min-w-0">
           <div className="rounded-full bg-[#eef6ff] p-2">
-            <HiOutlineCursorClick className="text-xl text-primary" />
+            <FiMousePointer className="text-xl text-primary" />
           </div>
 
           <div className="min-w-0">
