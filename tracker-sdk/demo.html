@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TrackFlow Demo Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0089f7",
+              textMain: "#252525",
+              textMuted: "#666666",
+              softBg: "#f7fbff",
+              softBorder: "#e8f4ff",
+            },
+            fontFamily: {
+              sans: [
+                "-apple-system",
+                "BlinkMacSystemFont",
+                "Segoe UI",
+                "sans-serif",
+              ],
+            },
+            boxShadow: {
+              card: "rgba(0, 137, 247, 0.16) 0px 20px 50px",
+              button: "rgba(0, 137, 247, 0.25) 0px 10px 24px",
+            },
+            borderRadius: {
+              card: "36px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body class="min-h-screen bg-white font-sans text-textMain">
+    <main
+      class="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top_left,rgba(0,137,247,0.10),transparent_32%),linear-gradient(180deg,#ffffff_0%,#f7fbff_100%)] px-6 py-12"
+    >
+      <section
+        class="w-full max-w-205 rounded-card border border-softBorder bg-white p-7 shadow-card sm:p-10"
+      >
+        <div class="mb-8">
+          <span
+            class="inline-flex rounded-full bg-[#eef8ff] px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-primary"
+          >
+            Tracking Demo
+          </span>
+
+          <h1
+            class="mt-5 text-4xl font-black tracking-[-0.04em] text-textMain sm:text-5xl"
+          >
+            TrackFlow Demo
+          </h1>
+
+          <p class="mt-4 max-w-2xl text-base leading-7 text-textMuted">
+            This page is used to test the vanilla JavaScript tracking script. A
+            page_view event is sent automatically. Click anywhere to create
+            click events.
+          </p>
+        </div>
+
+        <div class="mb-8 flex flex-wrap gap-3">
+          <button
+            class="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-button transition hover:-translate-y-0.5 hover:shadow-[rgba(0,137,247,0.35)_0px_16px_34px]"
+          >
+            Start Demo
+          </button>
+
+          <button
+            class="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-button transition hover:-translate-y-0.5 hover:shadow-[rgba(0,137,247,0.35)_0px_16px_34px]"
+          >
+            Try Click
+          </button>
+
+          <button
+            class="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-button transition hover:-translate-y-0.5 hover:shadow-[rgba(0,137,247,0.35)_0px_16px_34px]"
+          >
+            Track Action
+          </button>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-3">
+          <div
+            class="flex min-h-32.5 items-center justify-center rounded-[30px] border border-softBorder bg-softBg text-sm font-black text-primary"
+          >
+            Area One
+          </div>
+
+          <div
+            class="flex min-h-32.5 items-center justify-center rounded-[30px] border border-softBorder bg-softBg text-sm font-black text-primary"
+          >
+            Area Two
+          </div>
+
+          <div
+            class="flex min-h-32.5 items-center justify-center rounded-[30px] border border-softBorder bg-softBg text-sm font-black text-primary"
+          >
+            Area Three
+          </div>
+        </div>
+
+        <div
+          class="mt-8 rounded-[28px] border border-softBorder bg-[#fbfdff] p-5"
+        >
+          <p class="m-0 text-sm leading-6 text-textMuted">
+            Open the dashboard and refresh it after clicking here. You should
+            see a session in the Sessions View and dots in the Heatmap View.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="./tracker.js"></script>
+  </body>
+</html>
