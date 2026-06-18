@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-
 import { api } from "../lib/api";
 import PageSelector from "../components/heatmap/PageSelector";
 import ClickMap from "../components/heatmap/ClickMap";
-
+import { HiOutlineCursorClick } from "react-icons/hi";
 export default function Heatmap() {
   const [pages, setPages] = useState([]);
   const [selectedPage, setSelectedPage] = useState("");
@@ -57,44 +56,39 @@ export default function Heatmap() {
   }
 
   return (
-    <section className="space-y-8">
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-        <div className="max-w-3xl">
-          <span className="mb-4 inline-flex rounded-full bg-[#eef6ff] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary">
-            Click Map
-          </span>
-
-          <h1 className="text-4xl font-bold tracking-[-0.04em] text-text md:text-5xl lg:text-[54px] lg:leading-[1.15]">
-            Heatmap View
-          </h1>
-
-          <p className="mt-4 max-w-2xl text-base font-medium leading-7 text-text-secondary md:text-lg">
-            Select a tracked page and view click positions as simple blue dots.
-          </p>
+    <section className="space-y-6">
+      <div className="flex items-center gap-3">
+        <div className="rounded-full bg-blue-50 p-2">
+          <HiOutlineCursorClick className="text-xl text-primary" />
         </div>
 
-        <div className="w-full rounded-[28px] border border-[#fcfcfc] bg-[#f8fbff] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] sm:w-55 md:rounded-[36px]">
-          <p className="text-sm font-bold text-text-secondary">
-            Recorded Clicks
-          </p>
-          <p className="mt-2 text-4xl font-black tracking-[-0.04em] text-primary">
-            {clicks.length}
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Heatmap View</h1>
+
+          <p className="mt-1 text-gray-600">
+            Select a page URL and view click positions.
           </p>
         </div>
       </div>
 
       {error && (
-        <div className="rounded-3xl border border-red-100 bg-red-50 px-5 py-4 text-sm font-semibold text-red-600">
+        <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">
           {error}
         </div>
       )}
 
-      <PageSelector
-        pages={pages}
-        selectedPage={selectedPage}
-        loading={loadingPages}
-        onPageChange={handlePageChange}
-      />
+      {/* Controls */}
+      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        {/* Left */}
+        <div className="flex-1">
+          <PageSelector
+            pages={pages}
+            selectedPage={selectedPage}
+            loading={loadingPages}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      </div>
 
       <ClickMap
         selectedPage={selectedPage}
