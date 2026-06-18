@@ -4,10 +4,7 @@ const Event = require("../models/Event");
 // POST /api/events
 router.post("/events", async (req, res) => {
   try {
-    console.log("Incoming event body:", req.body);
-
     const event = await Event.create(req.body);
-
     res.status(201).json({
       success: true,
       event,
@@ -27,6 +24,7 @@ router.get("/sessions", async (req, res) => {
         $group: {
           _id: "$session_id",
           event_count: { $sum: 1 },
+          last_activity: { $max: "$timestamp" },
         },
       },
       {
@@ -34,11 +32,12 @@ router.get("/sessions", async (req, res) => {
           _id: 0,
           session_id: "$_id",
           event_count: 1,
+          last_activity: 1,
         },
       },
       {
         $sort: {
-          event_count: -1,
+          last_activity: -1,
         },
       },
     ]);
