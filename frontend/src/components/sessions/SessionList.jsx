@@ -1,3 +1,4 @@
+import { FiUsers } from "react-icons/fi";
 export default function SessionList({
   sessions,
   selectedSession,
@@ -5,17 +6,23 @@ export default function SessionList({
   onSessionClick,
 }) {
   return (
-    <div className="rounded-xl border border-[#fcfcfc] bg-white p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] md:rounded-card md:p-7">
+    <div className="rounded-xl border border-[#ebe8e8] bg-[#f8fbff]  p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] md:p-7">
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-[-0.03em] text-text md:text-3xl">
-            Sessions
-          </h2>
+          <div className="flex items-center gap-3">
+            <div className="rounded-full bg-[#eef6ff] p-2">
+              <FiUsers className="text-primary" />
+            </div>
+
+            <h2 className="text-2xl font-bold tracking-[-0.03em] text-text md:text-3xl">
+              Sessions
+            </h2>
+          </div>
+
           <p className="mt-2 text-sm font-medium text-text-secondary">
             Select a session
           </p>
         </div>
-
         <span className="rounded-full bg-[#eef6ff] px-4 py-2 text-xs font-bold text-primary">
           {sessions.length} total
         </span>
@@ -42,8 +49,8 @@ export default function SessionList({
                 className={[
                   "w-full rounded-[28px] border p-4 text-left transition duration-200 md:p-5",
                   active
-                    ? "border-primary bg-[#eef6ff] shadow-[0_16px_36px_rgba(0,137,247,0.18)]"
-                    : "border-[#eef6ff] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 hover:border-primary/30",
+                    ? "border-primary bg-[#eef6ff] "
+                    : "border-[#eef6ff] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.05)]",
                 ].join(" ")}
               >
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
